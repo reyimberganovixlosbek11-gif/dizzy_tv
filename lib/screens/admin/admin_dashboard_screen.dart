@@ -87,7 +87,7 @@ class AdminDashboardScreen extends StatelessWidget {
               _AdminMenuTile(
                 icon: Icons.category,
                 title: 'Kategoriyalar (janrlar)',
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminGenresScreen())),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AdminGenresScreen())),
               ),
               const SizedBox(height: 20),
               const Text('So\'nggi 5 ta kino', style: TextStyle(fontSize: 18, color: AppColors.textPrimary, fontWeight: FontWeight.bold)),
