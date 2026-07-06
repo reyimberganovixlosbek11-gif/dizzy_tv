@@ -24,7 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _logoTapCount++;
     if (_logoTapCount >= 5) {
       _logoTapCount = 0;
-      Navigator.push(context, MaterialPageRoute(builder: (_) => AdminLoginScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminLoginScreen()));
     }
   }
 

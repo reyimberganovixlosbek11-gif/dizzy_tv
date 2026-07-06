@@ -57,7 +57,7 @@ class _AdminMoviesScreenState extends State<AdminMoviesScreen> {
             icon: const Icon(Icons.add),
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => AdminMovieFormScreen()),
+              MaterialPageRoute(builder: (_) => const AdminMovieFormScreen()),
             ),
           ),
         ],
