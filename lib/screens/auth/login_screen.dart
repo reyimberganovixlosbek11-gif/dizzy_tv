@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../services/auth_service.dart';
 import '../../theme/app_theme.dart';
 import 'register_screen.dart';
 import '../main_nav_screen.dart';
+import '../../utils/toast_helper.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _login() async {
     if (_emailCtrl.text.trim().isEmpty || _passCtrl.text.isEmpty) {
-      Fluttertoast.showToast(msg: 'Email va parolni kiriting');
+      showToast(context, 'Email va parolni kiriting');
       return;
     }
     setState(() => _loading = true);
@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: 'Xatolik: kirish amalga oshmadi');
+      showToast(context, 'Xatolik: kirish amalga oshmadi');
     } finally {
       if (mounted) setState(() => _loading = false);
     }
@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: 'Google orqali kirishda xatolik');
+      showToast(context, 'Google orqali kirishda xatolik');
     } finally {
       if (mounted) setState(() => _loading = false);
     }
