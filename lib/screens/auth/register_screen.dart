@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../services/auth_service.dart';
 import '../../theme/app_theme.dart';
 import '../main_nav_screen.dart';
+import '../../utils/toast_helper.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -22,7 +22,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (_nameCtrl.text.trim().isEmpty ||
         _emailCtrl.text.trim().isEmpty ||
         _passCtrl.text.length < 6) {
-      Fluttertoast.showToast(msg: 'Barcha maydonlarni to\'ldiring (parol 6+ belgi)');
+      showToast(context, 'Barcha maydonlarni to\'ldiring (parol 6+ belgi)');
       return;
     }
     setState(() => _loading = true);
@@ -40,7 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         );
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: 'Ro\'yxatdan o\'tishda xatolik');
+      showToast(context, 'Ro\'yxatdan o\'tishda xatolik');
     } finally {
       if (mounted) setState(() => _loading = false);
     }
