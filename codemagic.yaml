@@ -11,7 +11,6 @@ workflows:
       # CM_KEYSTORE_PASS   → keystore paroli
       # CM_KEY_ALIAS       → key alias nomi
       # CM_KEY_PASS        → key paroli
-      # va pastdagi signing bo'limini yoqing
     triggering:
       events:
         - push
@@ -22,6 +21,11 @@ workflows:
     scripts:
       - name: Flutter versiyasini tekshirish
         script: flutter --version
+
+      - name: Gradle va Flutter keshini tozalash
+        script: |
+          flutter clean
+          cd android && ./gradlew clean || true && cd ..
 
       - name: Paketlarni yuklash
         script: flutter pub get
