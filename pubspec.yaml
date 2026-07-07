@@ -45,7 +45,7 @@ dev_dependencies:
 # package_info_plus 8.x uses Kotlin 2.x metadata which is incompatible
 # with Kotlin 1.9.24. Pin to 6.x to avoid Internal compiler error on CI.
 dependency_overrides:
-  package_info_plus: ^6.0.2
+  package_info_plus: 4.2.0
 
 flutter:
   uses-material-design: true
