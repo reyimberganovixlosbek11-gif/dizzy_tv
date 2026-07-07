@@ -1,0 +1,61 @@
+workflows:
+  android-release:
+    name: Dizzy.tv Android Release
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      java: 17
+      # Agar keystore bilan sign qilmoqchi bo'lsangiz,
+      # quyidagi o'zgaruvchilarni Codemagic > App settings > Environment variables bo'limiga qo'shing:
+      # CM_KEYSTORE        → keystore fayl (binary)
+      # CM_KEYSTORE_PASS   → keystore paroli
+      # CM_KEY_ALIAS       → key alias nomi
+      # CM_KEY_PASS        → key paroli
+      # va pastdagi signing bo'limini yoqing
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
+    scripts:
+      - name: Flutter versiyasini tekshirish
+        script: flutter --version
+
+      - name: Paketlarni yuklash
+        script: flutter pub get
+
+      - name: Kodni tahlil qilish
+        script: flutter analyze --no-fatal-infos
+        ignore_failure: true
+
+      - name: APK build qilish (debug signing)
+        script: |
+          flutter build apk \
+            --release \
+            --target-platform android-arm,android-arm64,android-x64 \
+            --split-per-abi
+        # Agar keystore sozlangan bo'lsa, yuqoridagi buyruqni o'chirib
+        # quyidagini yoqing:
+        #
+        # flutter build apk \
+        #   --release \
+        #   --target-platform android-arm,android-arm64,android-x64 \
+        #   --split-per-abi \
+        #   --keystore=$CM_KEYSTORE \
+        #   --keystore-password=$CM_KEYSTORE_PASS \
+        #   --key-alias=$CM_KEY_ALIAS \
+        #   --key-password=$CM_KEY_PASS
+
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
+      - build/app/outputs/apk/release/*.apk
+
+    publishing:
+      email:
+        recipients:
+          - reyimberganovixlosbek11@gmail.com
+        notify:
+          success: true
+          failure: true
