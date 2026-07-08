@@ -37,7 +37,7 @@ workflows:
       - name: SHA-1 / SHA-256 imzo kalitlarini ko'rsatish
         script: |
           cd android
-          ./gradlew signingReport 2>&1 | grep -A 10 'Variant: release' || true
+          ./gradlew signingReport
 
       - name: APK build qilish (debug signing)
         script: |
