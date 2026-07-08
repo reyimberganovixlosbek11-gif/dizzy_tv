@@ -34,11 +34,6 @@ workflows:
         script: flutter analyze --no-fatal-infos
         ignore_failure: true
 
-      - name: SHA-1 / SHA-256 imzo kalitlarini ko'rsatish
-        script: |
-          cd android
-          ./gradlew signingReport
-
       - name: APK build qilish (debug signing)
         script: |
           flutter build apk \
