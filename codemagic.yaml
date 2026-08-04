@@ -5,12 +5,6 @@ workflows:
     environment:
       flutter: stable
       java: 17
-      # Agar keystore bilan sign qilmoqchi bo'lsangiz,
-      # quyidagi o'zgaruvchilarni Codemagic > App settings > Environment variables bo'limiga qo'shing:
-      # CM_KEYSTORE        → keystore fayl (binary)
-      # CM_KEYSTORE_PASS   → keystore paroli
-      # CM_KEY_ALIAS       → key alias nomi
-      # CM_KEY_PASS        → key paroli
     triggering:
       events:
         - push
@@ -30,27 +24,23 @@ workflows:
       - name: Paketlarni yuklash
         script: flutter pub get
 
+      - name: SHA KALITLARNI KO'RISH (Firebase uchun)
+        script: |
+          cd android
+          chmod +x gradlew
+          ./gradlew signingReport 2>&1 | grep -A 5 "Variant: release\|SHA1\|SHA-256\|Keystore"
+          cd ..
+
       - name: Kodni tahlil qilish
         script: flutter analyze --no-fatal-infos
         ignore_failure: true
 
-      - name: APK build qilish (debug signing)
+      - name: APK build qilish
         script: |
           flutter build apk \
             --release \
             --target-platform android-arm,android-arm64,android-x64 \
             --split-per-abi
-        # Agar keystore sozlangan bo'lsa, yuqoridagi buyruqni o'chirib
-        # quyidagini yoqing:
-        #
-        # flutter build apk \
-        #   --release \
-        #   --target-platform android-arm,android-arm64,android-x64 \
-        #   --split-per-abi \
-        #   --keystore=$CM_KEYSTORE \
-        #   --keystore-password=$CM_KEYSTORE_PASS \
-        #   --key-alias=$CM_KEY_ALIAS \
-        #   --key-password=$CM_KEY_PASS
 
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
