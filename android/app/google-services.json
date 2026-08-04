@@ -12,7 +12,20 @@
           "package_name": "com.dizzytv.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "793170387114-rv14ftp1b8f700avbg4dktc0q53t0631.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dizzytv.app",
+            "certificate_hash": "298b677ba802704ddb85e7d9438075eb3b45302d"
+          }
+        },
+        {
+          "client_id": "793170387114-uhpluar1vobhed88k70skc971iv8u7d0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDuVA4Xph9Ant9hc9cAew9muu4VQDunHIo"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793170387114-uhpluar1vobhed88k70skc971iv8u7d0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
