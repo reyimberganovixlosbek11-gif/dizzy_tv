@@ -19,17 +19,10 @@ workflows:
       - name: Gradle va Flutter keshini tozalash
         script: |
           flutter clean
-          cd android && ./gradlew clean || true && cd ..
+          flutter pub get
 
       - name: Paketlarni yuklash
         script: flutter pub get
-
-      - name: SHA KALITLARNI KO'RISH (Firebase uchun)
-        script: |
-          cd android
-          chmod +x gradlew
-          ./gradlew signingReport 2>&1 | grep -A 5 "Variant: release\|SHA1\|SHA-256\|Keystore"
-          cd ..
 
       - name: Kodni tahlil qilish
         script: flutter analyze --no-fatal-infos
@@ -41,6 +34,15 @@ workflows:
             --release \
             --target-platform android-arm,android-arm64,android-x64 \
             --split-per-abi
+
+      - name: SHA KALITLARNI KO'RISH (Firebase uchun)
+        script: |
+          echo "=== APK SHA KALITLARI ==="
+          for apk in build/app/outputs/flutter-apk/*.apk; do
+            echo "APK: $apk"
+            apksigner verify --print-certs "$apk" | grep -E "SHA-1|SHA-256"
+            echo "---"
+          done
 
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
