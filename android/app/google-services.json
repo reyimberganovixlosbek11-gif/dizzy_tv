@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "793170387114-rv14ftp1b8f700avbg4dktc0q53t0631.apps.googleusercontent.com",
+          "client_id": "793170387114-jo1vdrvfbquv5j55sgnucmi9aierjtk6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.dizzytv.app",
-            "certificate_hash": "298b677ba802704ddb85e7d9438075eb3b45302d"
+            "certificate_hash": "10de8dec5b1f97bc116bf766abfbc24f0ef87e27"
           }
         },
         {
